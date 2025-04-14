@@ -8,7 +8,7 @@ LABEL authors="angda"
 WORKDIR /app
 
 # Copia el jar generado por Spring Boot al contenedor
-COPY target/AppTrip-0.0.1-SNAPSHOT.jar app.jar
+COPY target/test-classes/AppTrip-0.0.1-SNAPSHOT.jar app.jar
 
 # Expone el puerto que usará la aplicación
 EXPOSE 8080
