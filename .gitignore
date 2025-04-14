@@ -1,11 +1,3 @@
-##target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-
-# Ignora target, pero incluye el archivo .jar
-target/
-!target/*.jar
 
 ### STS ###
 .apt_generated
