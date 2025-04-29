@@ -18,18 +18,16 @@ import java.time.OffsetDateTime;
 @Table(name = "trip_participants")
 public class TripParticipant {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "trip_participant_seq")
-    @SequenceGenerator(name = "trip_participant_seq", sequenceName = "trip_participants_id_participant_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "trip_participants_id_gen")
+    @SequenceGenerator(name = "trip_participants_id_gen", sequenceName = "trip_participants_id_participant_seq", allocationSize = 1)
     @Column(name = "id_participant", nullable = false)
     private Integer id;
 
-    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_trip", nullable = false)
     private Trip idTrip;
 
-    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_user", nullable = false)
@@ -57,6 +55,5 @@ public class TripParticipant {
 
     @Column(name = "server_id")
     private Integer serverId;
-
 
 }

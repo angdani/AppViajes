@@ -30,7 +30,7 @@ public class TripController {
 
     // Inyecta la instancia del servicio TripService utilizando la anotación @Autowired
     @Autowired
-    public TripController(TripService tripService, TripParticipantService tripParticipantService, UserRepository userRepository, TripParticipantRepository tripParticipantRepository) {
+    public TripController(TripService tripService,  UserRepository userRepository, TripParticipantRepository tripParticipantRepository) {
         this.tripService = tripService;
         this.userRepository = userRepository;
         this.tripParticipantRepository = tripParticipantRepository;

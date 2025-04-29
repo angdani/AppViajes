@@ -20,7 +20,8 @@ import java.time.OffsetDateTime;
 @Table(name = "points_of_interest")
 public class PointsOfInterest {
     @Id
-    @ColumnDefault("nextval('points_of_interest_id_poi_seq')")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "points_of_interest_id_gen")
+    @SequenceGenerator(name = "points_of_interest_id_gen", sequenceName = "points_of_interest_id_poi_seq", allocationSize = 1)
     @Column(name = "id_poi", nullable = false)
     private Integer id;
 

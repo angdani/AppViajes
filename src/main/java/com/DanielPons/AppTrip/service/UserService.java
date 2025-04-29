@@ -9,11 +9,8 @@ import java.util.UUID;
 
 @Service
 public interface UserService {
-
     User createUser(User user);
     List<User> getAllUsers();
     Optional<User> getUserById(UUID id);
-
-
 }
 

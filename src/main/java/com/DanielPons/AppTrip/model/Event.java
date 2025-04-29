@@ -13,6 +13,8 @@ import lombok.*;
 @Table(name = "\"Events\"")
 public class Event {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Events_id_gen")
+    @SequenceGenerator(name = "Events_id_gen", sequenceName = "Eventos_id_evento_seq", allocationSize = 1)
     @Column(name = "id_event", nullable = false)
     private Long id;
 

@@ -19,7 +19,8 @@ import java.time.OffsetDateTime;
 @Table(name = "tasks")
 public class Task {
     @Id
-    @ColumnDefault("nextval('tasks_id_task_seq')")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tasks_id_gen")
+    @SequenceGenerator(name = "tasks_id_gen", sequenceName = "tasks_id_task_seq", allocationSize = 1)
     @Column(name = "id_task", nullable = false)
     private Integer id;
 

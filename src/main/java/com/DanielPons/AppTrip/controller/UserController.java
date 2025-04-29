@@ -36,20 +36,4 @@ public class UserController {
         return ResponseEntity.ok(createdUser);
     }
 
-    // Endpoint para obtener todos los usuarios: GET /api/users
-    @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        // Llama al servicio para obtener la lista de usuarios
-        return ResponseEntity.ok(userService.getAllUsers());
-    }
-
-    // Endpoint para obtener un usuario por su ID: GET /api/users/{id}
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable UUID id) {
-        // Busca el usuario en el servicio
-        Optional<User> user = userService.getUserById(id);
-        // Si lo encuentra, lo devuelve con 200 OK; si no, devuelve 404 Not Found
-        return user.map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
 }

@@ -3,10 +3,10 @@ package com.DanielPons.AppTrip.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.time.OffsetDateTime;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Builder
@@ -19,12 +19,11 @@ import java.util.UUID;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id_user", updatable = false, nullable = false)
+    @ColumnDefault("gen_random_uuid()")
+    @Column(name = "id_user", nullable = false)
     private UUID id;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false)
     private String email;
 
     @Column(name = "name", length = 100)
@@ -34,20 +33,34 @@ public class User {
     private String avatarUrl;
 
     @ColumnDefault("now()")
-    @Column(name = "created_at", updatable = false)
+    @Column(name = "created_at")
     private OffsetDateTime createdAt;
 
     @Column(name = "last_login")
     private OffsetDateTime lastLogin;
 
-    @OneToMany(mappedBy = "idUser", fetch = FetchType.LAZY)
-    private List<TripParticipant> tripParticipants;
+    @OneToMany(mappedBy = "createdBy")
+    private Set<Budget> budgets = new LinkedHashSet<>();
 
+    @OneToMany(mappedBy = "uploadedBy")
+    private Set<Document> documents = new LinkedHashSet<>();
 
-    // Constructor mejorado
-    public User(String email, String name) {
-        this.email = email;
-        this.name = name;
-        this.createdAt = OffsetDateTime.now();
-    }
+    @OneToMany(mappedBy = "createdBy")
+    private Set<Expens> expenses = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "createdBy")
+    private Set<Note> notes = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "addedBy")
+    private Set<PointsOfInterest> pointsOfInterests = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "assignedTo")
+    private Set<Task> tasksAssigned = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "createdBy")
+    private Set<Task> tasksCreator = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "idUser")
+    private Set<TripParticipant> tripParticipants = new LinkedHashSet<>();
+
 }

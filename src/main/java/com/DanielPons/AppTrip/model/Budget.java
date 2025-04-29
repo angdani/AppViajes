@@ -8,6 +8,8 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -19,7 +21,8 @@ import java.time.OffsetDateTime;
 @Table(name = "budgets")
 public class Budget {
     @Id
-    @ColumnDefault("nextval('budgets_id_budget_seq')")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "budgets_id_gen")
+    @SequenceGenerator(name = "budgets_id_gen", sequenceName = "budgets_id_budget_seq", allocationSize = 1)
     @Column(name = "id_budget", nullable = false)
     private Integer id;
 
@@ -67,5 +70,8 @@ public class Budget {
 
     @Column(name = "server_id")
     private Integer serverId;
+
+    @OneToMany(mappedBy = "idBudget")
+    private Set<com.DanielPons.AppTrip.model.Expens> expenses = new LinkedHashSet<>();
 
 }

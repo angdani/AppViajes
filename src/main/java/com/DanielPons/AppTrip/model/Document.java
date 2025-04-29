@@ -18,7 +18,8 @@ import java.time.OffsetDateTime;
 @Table(name = "documents")
 public class Document {
     @Id
-    @ColumnDefault("nextval('documents_id_document_seq')")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "documents_id_gen")
+    @SequenceGenerator(name = "documents_id_gen", sequenceName = "documents_id_document_seq", allocationSize = 1)
     @Column(name = "id_document", nullable = false)
     private Integer id;
 

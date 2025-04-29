@@ -1,9 +1,6 @@
 package com.DanielPons.AppTrip.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -19,7 +16,8 @@ import java.time.OffsetDateTime;
 @Table(name = "sync_metadata")
 public class SyncMetadatum {
     @Id
-    @ColumnDefault("nextval('sync_metadata_id_sync_seq')")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sync_metadata_id_gen")
+    @SequenceGenerator(name = "sync_metadata_id_gen", sequenceName = "sync_metadata_id_sync_seq", allocationSize = 1)
     @Column(name = "id_sync", nullable = false)
     private Integer id;
 
